@@ -22,6 +22,7 @@ class Register extends Component{
         password : '',
         passwordConfirmation : '',
         errors : [],
+        loading: false,
     };
 
     isFormvalid = () => {
@@ -73,6 +74,7 @@ class Register extends Component{
         if (this.isFormvalid()){
             this.setState({
                 errors: [],
+                loading: true,
             });
             console.log('Entered into submission, and initiating the submission');
             event.preventDefault();
@@ -82,18 +84,25 @@ class Register extends Component{
                 .createUserWithEmailAndPassword(`${this.state.email}`, `${this.state.password}`)
                 .then(createduser => {
                     console.log(createduser)
+                    this.setState({ loading: false });
                 })
                 .catch(err => {
                     console.error(err);
+                    this.setState({ errors: this.state.errors.concat(err), loading: false });
                 })
         }
     };
+
+    handleInputError = (errors, inputName) => {
+        console.log(`in handle input error function and the result for ${errors} and inputName ${inputName} is ${errors.some( error => error.message.toLowerCase().includes(inputName)) ? 'error': ''}`)
+        return errors.some( error => error.message.toLowerCase().includes(inputName)) ? 'error': '';
+    }
 
 displayErrors = errors => errors.map((error, i) => <p key = {i}>{error.message}</p>);
 
     render() {
 
-        const { username, password, passwordConfirmation, email, errors } = this.state;
+        const { username, password, passwordConfirmation, email, errors, loading } = this.state;
 
         return(
             <Grid textAlign = "center" verticalAlign = "middle" className = "app">
@@ -105,11 +114,11 @@ displayErrors = errors => errors.map((error, i) => <p key = {i}>{error.message}<
                     <Form onSubmit = {this.handleSubmit} size = "large">
                         <Segment stacked>
                             <Form.Input fluid name = "username" value = {username} icon = "user" iconPosition = "left" placeholder = "username" onChange = {this.handleChange} type = "text" />
-                            <Form.Input fluid name = "email" value = {email} icon = "mail" iconPosition = "left" placeholder = "email" onChange = {this.handleChange} type = "email" />
-                            <Form.Input fluid name = "password" value = {password} icon = "lock" iconPosition = "left" placeholder = "password" onChange = {this.handleChange} type = "password" />
-                            <Form.Input fluid name = "passwordConfirmation" value = {passwordConfirmation} icon = "repeat" iconPosition = "left" placeholder = "password confirmation" onChange = {this.handleChange} type = "password" />
+                            <Form.Input fluid name = "email" value = {email} icon = "mail" iconPosition = "left" placeholder = "email" onChange = {this.handleChange} type = "email" className = {this.handleInputError(errors, 'mail')} />
+                            <Form.Input fluid name = "password" value = {password} icon = "lock" iconPosition = "left" placeholder = "password" onChange = {this.handleChange} type = "password" className = {this.handleInputError(errors, 'password')} />
+                            <Form.Input fluid name = "passwordConfirmation" value = {passwordConfirmation} icon = "repeat" iconPosition = "left" placeholder = "password confirmation" onChange = {this.handleChange} type = "password" className = {this.handleInputError(errors, 'password')} />
 
-                            <Button color = "orange" fluid size = "large" >Submit</Button>
+                            <Button disabled = {loading} className = { loading ? 'loading': ''} color = "orange" fluid size = "large" >Submit</Button>
                         </Segment>
                     </Form>
                     {errors.length > 0 && (
