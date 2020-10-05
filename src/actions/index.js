@@ -10,11 +10,27 @@ export const setUser = user => {
     }
 };
 
-export const setLoader = () => {
+export const clearUser = () => {
+    return {
+        type: actioTypes.CLEAR_USER
+    }
+}
+
+export const setTableData = ( data ) => {
+    return {
+        type: actioTypes.EXPORT_TABLE_DATA,
+        payload : {
+            tableData: data
+        }
+    }
+}
+
+
+export const setLoader = (data) => {
     return {
         type: actioTypes.SET_LOADER,
         payload: {
-            isLoading: true
+            isLoading: data
         }
     }
 };

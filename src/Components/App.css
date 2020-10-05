@@ -5,3 +5,87 @@ body,
     background: #eee;
     padding: 1em;
 }
+.root {
+    background: #C0C0C0;
+}
+
+
+.app-home {
+    background: #eee;
+    padding: 1em;
+}
+
+.headerContainer {
+    display: flex;
+  align-items: center;
+  justify-content: stretch;
+  width: 100%;
+  height: 100px;
+  border-bottom: 1px solid #d3cece;
+  box-shadow: 0 5px 5px 1px #C0C0C0;
+  transform: box-shadow 0.15s ease 0.1;
+  background: white;
+
+}
+
+.headerWrapper {
+    display: flex;
+  justify-content: center;
+  margin: 10px;
+  /* border-right: 1px solid #b7c8da; */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dvaraLogoImgWrapper {
+    display: flex;
+    margin: 0px 5px;
+    width: 120px;
+    height: 80px;
+}
+.dvaraLogoImg {
+    margin: 0 auto;
+    height: inherit;
+    width: inherit;
+    /* border: 1px solid #b7c8da; */
+    border-radius: 3px;
+}
+
+.headerCustomTitleWrapper {
+    width: inherit;
+    height: inherit;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    float: 1;
+    margin-right: 0;
+}
+
+.headerCustomTitle {
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+/* 
+.exception {
+    background: linear-gradient(to bottom, #33ccff 0%, #6666ff 100%);
+    border: 1px solid rgb(162, 198, 20);
+    border-radius: 2px;
+    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+    color: #72330c;
+    display: inline-block;
+    vertical-align: top;
+    width: 40%;
+    -webkit-box-shadow: 0 0 10px 10px #fff;
+    -moz-box-shadow: 0 0 10px 10px #fff;
+    box-shadow: 0 0 10px 10px #fff;
+  } */
+
+  .tableContainer {
+
+  border-bottom: 1px solid #d3cece;
+  box-shadow: 0 5px 5px 1px #C0C0C0;
+  transform: box-shadow 0.15s ease 0.1;
+  background: linear-gradient(to bottom, #33ccff 0%, #99ff99 100%);
+  }

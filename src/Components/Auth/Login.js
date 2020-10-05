@@ -77,8 +77,8 @@ displayErrors = errors => errors.map((error, i) => <p key = {i}>{error.code}</p>
                     </Header>
                     <Form onSubmit = {this.handleSubmit} size = "large">
                         <Segment stacked>
-                            <Form.Input fluid name = "email" value = {email} icon = "mail" iconPosition = "left" placeholder = "email" onChange = {this.handleChange} type = "email" className = {this.handleInputError(errors, 'identifier')} />
-                            <Form.Input fluid name = "password" value = {password} icon = "lock" iconPosition = "left" placeholder = "password" onChange = {this.handleChange} type = "password" className = {this.handleInputError(errors, 'password')} />
+                            <Form.Input fluid name = "email" value = {email} icon = "mail" iconPosition = "left" placeholder = "email" onChange = {this.handleChange} type = "email" className = {this.handleInputError(errors, 'identifier')} required />
+                            <Form.Input fluid name = "password" value = {password} icon = "lock" iconPosition = "left" placeholder = "password" onChange = {this.handleChange} type = "password" className = {this.handleInputError(errors, 'password')} required />
 
                             <Button disabled = {loading} className = { loading ? 'loading': ''} color = "green" fluid size = "medium" >Submit</Button>
                         </Segment>

@@ -4,6 +4,7 @@ import App from './Components/App';
 import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import Spinner from './Spinner';
+import TopHeader from './Components/TopHeader';
 
 import 'semantic-ui-css/semantic.min.css';
 
@@ -19,7 +20,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './reducers';
 
-import { setUser, setLoader, RemoveLoader } from './actions';
+import { setUser, setLoader, RemoveLoader, clearUser } from './actions';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -28,13 +29,11 @@ class Root extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
             if(user) {
-                console.log(this.props.isLoading);
-                // this.props.setLoader();
-                console.log(this.props.isLoading);
                 this.props.setUser(user);
                 this.props.history.push('/');
-                // this.props.RemoveLoader();
-                console.log(this.props.isLoading);
+            } else {
+                this.props.history.push('/login');
+                this.props.clearUser();
             }
         });
     }
@@ -44,17 +43,17 @@ class Root extends React.Component {
             <Switch>
                 <Route path = '/' exact component = {App}/>
                 <Route path = '/login' exact component = {Login}/>
-                <Route path = '/register' exact component = {Register}/>
+                {/* <Route path = '/register' exact component = {Register}/> */}
             </Switch>
         )
     }
 }
 
 const mapStateFromProps = state => ({
-    // isLoading: state.user.isLoading,
+    isLoading: state.user.isLoading,
 });
 
-const RootWithAuth = withRouter(connect(mapStateFromProps, { setUser, setLoader, RemoveLoader })(Root));
+const RootWithAuth = withRouter(connect(mapStateFromProps, { setUser, setLoader, RemoveLoader, clearUser })(Root));
 
 ReactDOM.render(
     <Provider store = {store}>

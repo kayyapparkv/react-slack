@@ -14,20 +14,27 @@ const user_reducer = (state = initialUserState, action) => {
                 currentUser: action.payload.currentUser,
                 isLoading: false
             }
+        case actionTypes.CLEAR_USER: 
+            return {
+                ...initialUserState,
+                isLoading: false
+            }
         default:
             return state;
     }
 };
 
 const initialLoaderState = {
-    isLoading: false,
+    todayInsemination: 0,
+    totalInsemination: 0,
+    noOfAits: 0,
 }
 
 const loader_reducer = (state = initialLoaderState, action) => {
     switch (action.type) {
         case actionTypes.SET_LOADER:
             return {
-                isLoading: action.payload.isLoading,
+             ...action.payload.isLoading,
             }
         case actionTypes.REMOVE_LOADER:
             return {
